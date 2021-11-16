@@ -135,12 +135,12 @@
 
 .closed {
 	overflow: hidden;
-	max-width: 0;
+	max-height: 0;
 	padding: 0;
 }
 
 .opened  {
-	max-width: auto;
+	max-height: auto;
 	padding: 30px;
 }
 

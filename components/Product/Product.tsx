@@ -9,6 +9,7 @@ import { declOfNum, priceRu } from '../../helpers/helpers';
 import { Devider } from '../Devider/Devider';
 import Image from 'next/image';
 import { useState } from 'react';
+import { Review } from '../Review/Review';
 
 export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
 	const [isReviewOpend, setIsReviewOpend] = useState<boolean>(false);
@@ -73,7 +74,9 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
 				[styles.opened]: isReviewOpend,
 				[styles.closed]: !isReviewOpend
 			})}>
-				sdadsa
+				{product.reviews.map(r => (
+					<Review key={r._id} review={r}/>
+				))}
 			</Card>
 		</>
 	);
