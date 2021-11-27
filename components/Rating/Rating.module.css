@@ -1,7 +1,8 @@
 .filled svg {
 	fill: var(--primary);
 }
-.star{
+
+.star {
 	display: inline-block;
 }
 
@@ -21,6 +22,7 @@
 	position: absolute;
 	bottom: -15px;
 	left: 0;
+
 	color: var(--red);
 }
 
