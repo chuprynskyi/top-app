@@ -7,6 +7,7 @@
       "esnext"
     ],
     "allowJs": false,
+    "alwaysStrict": true,
     "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,

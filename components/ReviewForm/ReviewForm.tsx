@@ -2,12 +2,12 @@ import { ReviewFormProps } from './ReviewForm.props';
 import styles from './ReviewForm.module.css';
 import CloseIcon from './close.svg';
 import cn from 'classnames';
-import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Rating } from '../Rating/Rating';
 import { Textarea } from '../Textarea/Textarea';
+import { Button } from '../Button/Button';
 import { useForm, Controller } from 'react-hook-form';
-import { IReviewForm, IReviewSendResponse } from './ReviewForm.interface';
+import { IReviewForm, IReviewSentResponse } from './ReviewForm.interface';
 import axios from 'axios';
 import { API } from '../../helpers/api';
 import { useState } from 'react';
@@ -18,8 +18,8 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 	const [error, setError] = useState<string>();
 
 	const onSubmit = async (formData: IReviewForm) => {
-		try{
-			const { data } = await axios.post<IReviewSendResponse>(API.review.createDemo, {...formData, productId});
+		try {
+			const { data } = await axios.post<IReviewSentResponse>(API.review.createDemo, { ...formData, productId });
 			if (data.message) {
 				setIsSuccess(true);
 				reset();
@@ -27,9 +27,12 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 				setError('Что-то пошло не так');
 			}
 		} catch (e) {
+			if (e instanceof Error) {
 			setError(e.message);
+			}
 		}
 	};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className={cn(styles.reviewForm, className)}
@@ -43,7 +46,8 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 					aria-invalid={errors.name ? true : false}
 				/>
 				<Input 
-					{...register('title', { required: { value: true, message: 'Заполните заголовок' } })} placeholder='Заголовок отзыва' 
+					{...register('title', { required: { value: true, message: 'Заполните заголовок' } })} 
+					placeholder='Заголовок отзыва' 
 					className={styles.title}
 					error={errors.title}
 					tabIndex={isOpened ? 0 : -1}
@@ -68,7 +72,8 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 					/>
 				</div>
 				<Textarea 
-					{...register('description', { required: { value: true, message: 'Заполните описание' } })} placeholder='Текст отзыва' 
+					{...register('description', { required: { value: true, message: 'Заполните описание' } })} 
+					placeholder='Текст отзыва' 
 					className={styles.description}
 					error={errors.description}
 					tabIndex={isOpened ? 0 : -1}
