@@ -8,7 +8,7 @@ import { YMInitializer } from 'react-yandex-metrika';
 
 Router.events.on('routeChangeComplete', (url: string) => {
   if (typeof window !== 'undefined') {
-    ym('hit', url)
+    ym('hit', url);
   }
 });
 
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
       />
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 
 export default MyApp;
