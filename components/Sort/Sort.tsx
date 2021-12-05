@@ -33,5 +33,5 @@ export const Sort = ({ sort, setSort, className, ...props }: SortProps): JSX.Ele
         {/* &nbsp; - нерозривний пробіл(краще не використовувати, погана практика) */}
       </button>
     </div>
-  )
+  );
 };
